@@ -1,4 +1,4 @@
-Primarily human-written C project implementing a VM of the CPUs I built in Turing Complete
+Primarily human-written C project implementing a VM of the CPUs I built in Turing Complete*
 
 Includes
 - Overture
@@ -10,3 +10,10 @@ Includes
 - D = Destination
 - A = Operand A
 - B = Operand B
+
+To run something:
+`gcc -Wall -Wextra -std=c11 -o [compiled name] src/[file].c`
+
+---
+
+"That is not a videogame. That is homework." - my wife, upon seeing me playing this game.
