@@ -36,14 +36,39 @@ void cmp(int dest, uint32_t src1, uint32_t src2) {}
 void ALU(int arg, int dest, uint32_t src1, uint32_t src2) {
 
     switch (arg) {
-
         case 0: 
             nand(dest, src1, src2);
             break;
-        
         case 1:
             or(dest, src1, src2);
             break;
+        case 2:
+            and(dest, src1, src2);
+            break;
+        case 3:
+            nor(dest, src1, src2);
+            break;
+        case 4:
+            add(dest, src1, src2);
+            break;
+        case 5:
+            sub(dest, src1, src2);
+            break;
+        case 6:
+            xor(dest, src1, src2);
+            break;  
+        case 7:
+            lsl(dest, src1, src2);
+            break;
+        case 8:
+            lsr(dest, src1, src2);
+            break;
+        case 9:
+            asr(dest, src1, src2);
+            break;
+        case 10:
+            cmp(dest, src1, src2);
+            break;                  
     };
 }
 
