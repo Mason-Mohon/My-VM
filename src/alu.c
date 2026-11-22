@@ -20,13 +20,28 @@ uint32_t ALU(int arg, uint32_t src1, uint32_t src2) {
         case 4: /*ADD*/ output = argA + argB; break;
         case 5: /*SUB*/ output = argA - argB; break;
         case 6: /*XOR*/ output = argA ^ argB; break;  
-        case 7: /*LSL*/ break;
-        case 8: /*LSR*/ break;
-        case 9: /*ASR*/ break;
-        case 10:/*CMP*/ break;              
+        case 7: /*LSL*/ output = argA << argB; break;
+        case 8: /*LSR*/ output = argA >> argB; break;
+        case 9: /*ASR*/ 
+            if ((argB % 32) == 0) {output = argA; break;}
+            else {
+                uint32_t sign = (argA >> 31) & 0x1; 
+                uint32_t shift = argA >> (argB & 0x1F);
+                uint32_t fill = 0;
+                if (sign == 1) {fill = 0xFFFFFFFF << (32 - (argB & 0x1F));};
+                output = shift | fill;
+                break;
+            }
+        case 10:/*CMP*/ 
+            if (argB == argA) {output = 1;}
+            else if ((argA >> 31) == 0) {if (argA < argB) {output = 2;} else {output = 0;};}
+            else {if (argA < argB) {output = 3;} else {output = 0;};};
+            /*TODO: store output in flags register for jumps on comparison*/
+            /*TODO: rest of comparisons and encoding rules*/
+            break;              
     };
 
-    return output
+    return output;
 }
 
 int main(void) {
